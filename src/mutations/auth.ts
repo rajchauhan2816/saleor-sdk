@@ -52,7 +52,7 @@ export const tokenRefreshMutation = gql`
 
 export const generateOtpMutation = gql`
   ${otpErrorFragment}
-  mutation generateOtp($mobile: String) {
+  mutation generateOtp($mobile: String!) {
     generateOtp(mobile: $mobile) {
       authCode
       errors: accountErrors {

@@ -42,5 +42,5 @@ export interface generateOtp {
 }
 
 export interface generateOtpVariables {
-  mobile?: string | null;
+  mobile: string;
 }
