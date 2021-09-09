@@ -101,6 +101,29 @@ export class AuthJobs extends JobsHandler<AuthJobsEventsValues> {
     return {};
   };
 
+  generateOtp = async ({
+    mobile,
+  }: {
+    mobile: string;
+  }): PromiseAuthJobRunResponse => {
+    const { data, error } = await this.apolloClientManager.generateOtp(mobile);
+
+    if (error) {
+      return {
+        dataError: {
+          error,
+          type: DataErrorAuthTypes.GENERATE_OTP,
+        },
+      };
+    }
+
+    this.localStorageHandler.setAuthCode(data?.authCode || null);
+
+    return {
+      data,
+    };
+  };
+
   signIn = async ({
     email,
     password,

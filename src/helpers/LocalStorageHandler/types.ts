@@ -14,6 +14,7 @@ export enum LocalStorageItems {
   CSRF_TOKEN = "csrf_token",
   CHECKOUT = "data_checkout",
   PAYMENT = "data_payment",
+  AUTH_CODE = "auth_code",
 }
 export enum LocalStorageEvents {
   CLEAR = "clear",

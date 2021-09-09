@@ -33,6 +33,10 @@ export class LocalStorageHandler extends LocalStorageHandlerProxy {
     this.saveItem(LocalStorageItems.TOKEN, token);
   }
 
+  setAuthCode(authCode: string | null): void {
+    this.saveItem(LocalStorageItems.AUTH_CODE, authCode);
+  }
+
   setCsrfToken(csrfToken: string | null): void {
     this.saveItem(LocalStorageItems.CSRF_TOKEN, csrfToken);
   }

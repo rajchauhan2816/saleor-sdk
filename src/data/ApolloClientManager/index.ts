@@ -1,5 +1,9 @@
 import ApolloClient from "apollo-client";
 
+import {
+  generateOtp,
+  generateOtpVariables,
+} from "../../mutations/gqlTypes/generateOtp";
 import { Checkout } from "../../fragments/gqlTypes/Checkout";
 import { Payment } from "../../fragments/gqlTypes/Payment";
 import { User } from "../../fragments/gqlTypes/User";
@@ -188,6 +192,35 @@ export class ApolloClientManager {
       };
     }
     return {};
+  };
+
+  generateOtp = async (mobile: string) => {
+    const { data, errors } = await this.client.mutate<
+      generateOtp,
+      generateOtpVariables
+    >({
+      fetchPolicy: "no-cache",
+      mutation: AuthMutations.generateOtpMutation,
+      variables: {
+        mobile,
+      },
+    });
+
+    if (errors?.length) {
+      return {
+        error: errors,
+      };
+    }
+    if (data?.generateOtp?.errors.length) {
+      return {
+        error: data.generateOtp.errors,
+      };
+    }
+    return {
+      data: {
+        authCode: data?.generateOtp?.authCode,
+      },
+    };
   };
 
   signIn = async (email: string, password: string) => {

@@ -5,4 +5,5 @@ export enum DataErrorAuthTypes {
   "GET_USER",
   "REGISTER_ACCOUNT",
   "RESET_PASSWORD_REQUEST",
+  "GENERATE_OTP",
 }
