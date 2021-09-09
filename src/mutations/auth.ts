@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-import { accountErrorFragment } from "../fragments/errors";
+import { accountErrorFragment, otpErrorFragment } from "../fragments/errors";
 
 export const tokenAuthMutation = gql`
   ${accountErrorFragment}
@@ -51,12 +51,12 @@ export const tokenRefreshMutation = gql`
 `;
 
 export const generateOtpMutation = gql`
-  ${accountErrorFragment}
+  ${otpErrorFragment}
   mutation generateOtp($mobile: String) {
     generateOtp(mobile: $mobile) {
       authCode
       errors: accountErrors {
-        ...AccountError
+        ...OTPError
       }
     }
   }

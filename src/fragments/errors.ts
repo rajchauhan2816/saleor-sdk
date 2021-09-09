@@ -23,3 +23,11 @@ export const accountErrorFragment = gql`
     message
   }
 `;
+
+export const otpErrorFragment = gql`
+  fragment OTPError on OTPError {
+    code
+    field
+    message
+  }
+`;

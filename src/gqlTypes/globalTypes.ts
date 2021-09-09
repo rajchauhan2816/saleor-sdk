@@ -415,6 +415,14 @@ export enum LanguageCodeEnum {
   ZH_HANT = "ZH_HANT",
 }
 
+/**
+ * An enumeration.
+ */
+export enum OTPErrorCode {
+  INVALID_MOBILE = "INVALID_MOBILE",
+  INVALID_OTP = "INVALID_OTP",
+}
+
 export enum OrderDirection {
   ASC = "ASC",
   DESC = "DESC",

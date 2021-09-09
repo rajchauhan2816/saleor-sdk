@@ -6,10 +6,10 @@
 import { OTPErrorCode } from "./../../gqlTypes/globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: generateOtp
+// GraphQL fragment: OTPError
 // ====================================================
 
-export interface generateOtp_generateOtp_errors {
+export interface OTPError {
   __typename: "OTPError";
   /**
    * The error code.
@@ -23,24 +23,4 @@ export interface generateOtp_generateOtp_errors {
    * The error message.
    */
   message: string | null;
-}
-
-export interface generateOtp_generateOtp {
-  __typename: "GenerateOTP";
-  /**
-   * Generated code for user authentication along with OTP.
-   */
-  authCode: string | null;
-  errors: generateOtp_generateOtp_errors[];
-}
-
-export interface generateOtp {
-  /**
-   * Generated OTP for given user mobile number.
-   */
-  generateOtp: generateOtp_generateOtp | null;
-}
-
-export interface generateOtpVariables {
-  mobile?: string | null;
 }
