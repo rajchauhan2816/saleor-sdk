@@ -179,6 +179,95 @@ export class AuthAPI extends ErrorListener {
   };
 
   /**
+   * @param mobile used for authentication
+   * @returns authCode
+   */
+  generateOtp = async (
+    mobile: string
+  ): PromiseRunResponse<DataErrorAuthTypes> => {
+    const { data, dataError } = await this.jobsManager.run(
+      "auth",
+      "generateOtp",
+      {
+        mobile,
+      }
+    );
+
+    if (dataError) {
+      return {
+        data,
+        dataError,
+        pending: false,
+      };
+    }
+
+    return {
+      data,
+      dataError,
+      pending: false,
+    };
+  };
+
+  /**
+   * @param otp otp for authentication
+   * @param mobile for validation
+   * @param authCode for authentication code
+   * @returns csrftoken and user
+   */
+  validateOtp = async (
+    otp: string,
+    mobile: string,
+    authCode: string
+  ): PromiseRunResponse<DataErrorAuthTypes> => {
+    const { data, dataError } = await this.jobsManager.run(
+      "auth",
+      "validateOtp",
+      {
+        authCode,
+        mobile,
+        otp,
+      }
+    );
+    // TODO: IF AUTOSIGNIN REQUIRED
+    // try {
+    //   if (autoSignIn && !dataError?.error && CREDENTIAL_API_EXISTS) {
+    //     await navigator.credentials.store(
+    //       new window.PasswordCredential({
+    //         id: email,
+    //         password,
+    //       })
+    //     );
+    //   }
+    // } catch (credentialsError) {
+    //   // eslint-disable-next-line no-console
+    //   console.warn(BROWSER_NO_CREDENTIAL_API_MESSAGE, credentialsError);
+    // }
+
+    if (dataError) {
+      return {
+        data,
+        dataError,
+        pending: false,
+      };
+    }
+
+    const { data: userData, dataError: userDataError } =
+      await this.jobsManager.run("auth", "provideUser", undefined);
+    if (this.config.loadOnStart.checkout) {
+      await this.jobsManager.run("checkout", "provideCheckout", {
+        channel: this.config.channel,
+        isUserSignedIn: !!data?.user,
+      });
+    }
+
+    return {
+      data: userData,
+      dataError: userDataError,
+      pending: false,
+    };
+  };
+
+  /**
    * Tries to authenticate user with given email and password.
    * @param email Email used for authentication.
    * @param password Password used for authentication.
@@ -192,10 +281,6 @@ export class AuthAPI extends ErrorListener {
     const { data, dataError } = await this.jobsManager.run("auth", "signIn", {
       email,
       password,
-    });
-
-    await this.jobsManager.run("auth", "generateOtp", {
-      mobile: "+918700675563",
     });
 
     try {

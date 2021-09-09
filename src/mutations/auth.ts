@@ -61,3 +61,20 @@ export const generateOtpMutation = gql`
     }
   }
 `;
+
+export const validateOtpMutation = gql`
+  ${otpErrorFragment}
+  mutation validateOtp($otp: String!, $mobile: String!, $authCode: String!) {
+    validateOtp(otp: $otp, mobile: $mobile, authCode: $authCode) {
+      token
+      refreshToken
+      csrfToken
+      errors: accountErrors {
+        ...OTPError
+      }
+      user {
+        id
+      }
+    }
+  }
+`;

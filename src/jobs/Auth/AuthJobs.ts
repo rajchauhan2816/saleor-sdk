@@ -124,6 +124,38 @@ export class AuthJobs extends JobsHandler<AuthJobsEventsValues> {
     };
   };
 
+  validateOtp = async ({
+    authCode,
+    mobile,
+    otp,
+  }: {
+    authCode: string;
+    mobile: string;
+    otp: string;
+  }): PromiseAuthJobRunResponse => {
+    const { data, error } = await this.apolloClientManager.validateOtp(
+      otp,
+      mobile,
+      authCode
+    );
+
+    if (error) {
+      return {
+        dataError: {
+          error,
+          type: DataErrorAuthTypes.VALIDATE_OTP,
+        },
+      };
+    }
+
+    this.localStorageHandler.setSignInToken(data?.token || null);
+    this.localStorageHandler.setCsrfToken(data?.csrfToken || null);
+
+    return {
+      data,
+    };
+  };
+
   signIn = async ({
     email,
     password,

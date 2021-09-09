@@ -96,6 +96,10 @@ import {
   VerifySignInTokenInput,
   RefreshSignInTokenInput,
 } from "./types";
+import {
+  validateOtp,
+  validateOtpVariables,
+} from "../../mutations/gqlTypes/validateOtp";
 
 export class ApolloClientManager {
   private client: ApolloClient<any>;
@@ -219,6 +223,39 @@ export class ApolloClientManager {
     return {
       data: {
         authCode: data?.generateOtp?.authCode,
+      },
+    };
+  };
+
+  validateOtp = async (otp: string, mobile: string, authCode: string) => {
+    const { data, errors } = await this.client.mutate<
+      validateOtp,
+      validateOtpVariables
+    >({
+      fetchPolicy: "no-cache",
+      mutation: AuthMutations.validateOtpMutation,
+      variables: {
+        authCode,
+        mobile,
+        otp,
+      },
+    });
+
+    if (errors?.length) {
+      return {
+        error: errors,
+      };
+    }
+    if (data?.validateOtp?.errors.length) {
+      return {
+        error: data.validateOtp.errors,
+      };
+    }
+    return {
+      data: {
+        csrfToken: data?.validateOtp?.csrfToken,
+        token: data?.validateOtp?.token,
+        user: data?.validateOtp?.user,
       },
     };
   };
