@@ -50,7 +50,7 @@ export const tokenRefreshMutation = gql`
   }
 `;
 
-export const otpGenerate = gql`
+export const generateOtpMutation = gql`
   ${accountErrorFragment}
   mutation generateOtp($mobile: String) {
     generateOtp(mobile: $mobile) {
