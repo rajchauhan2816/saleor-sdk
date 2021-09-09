@@ -16,8 +16,7 @@ export interface SetPassword_setPassword_errors {
    */
   code: AccountErrorCode;
   /**
-   * Name of a field that caused the error. A value of `null` indicates that the
-   * error isn't associated with a particular field.
+   * Name of a field that caused the error. A value of `null` indicates that the error isn't associated with a particular field.
    */
   field: string | null;
   /**
@@ -155,7 +154,7 @@ export interface SetPassword_setPassword_user {
    * The ID of the object.
    */
   id: string;
-  email: string;
+  email: string | null;
   firstName: string;
   lastName: string;
   isStaff: boolean;
@@ -170,8 +169,7 @@ export interface SetPassword_setPassword_user {
 export interface SetPassword_setPassword_accountErrors {
   __typename: "AccountError";
   /**
-   * Name of a field that caused the error. A value of `null` indicates that the
-   * error isn't associated with a particular field.
+   * Name of a field that caused the error. A value of `null` indicates that the error isn't associated with a particular field.
    */
   field: string | null;
   /**

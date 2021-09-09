@@ -16,8 +16,7 @@ export interface TokenAuth_tokenCreate_errors {
    */
   code: AccountErrorCode;
   /**
-   * Name of a field that caused the error. A value of `null` indicates that the
-   * error isn't associated with a particular field.
+   * Name of a field that caused the error. A value of `null` indicates that the error isn't associated with a particular field.
    */
   field: string | null;
   /**

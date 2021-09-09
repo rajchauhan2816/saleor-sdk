@@ -517,6 +517,8 @@ export interface AttributeInput {
   slug: string;
   values?: (string | null)[] | null;
   valuesRange?: IntRangeInput | null;
+  dateTime?: DateTimeRangeInput | null;
+  date?: DateRangeInput | null;
   boolean?: boolean | null;
 }
 
@@ -539,11 +541,23 @@ export interface CollectionFilterInput {
   search?: string | null;
   metadata?: (MetadataFilter | null)[] | null;
   ids?: (string | null)[] | null;
+  channel?: string | null;
 }
 
 export interface CollectionSortingInput {
   direction: OrderDirection;
+  channel?: string | null;
   field: CollectionSortField;
+}
+
+export interface DateRangeInput {
+  gte?: any | null;
+  lte?: any | null;
+}
+
+export interface DateTimeRangeInput {
+  gte?: any | null;
+  lte?: any | null;
 }
 
 export interface IntRangeInput {
@@ -582,10 +596,12 @@ export interface ProductFilterInput {
   minimalPrice?: PriceRangeInput | null;
   productTypes?: (string | null)[] | null;
   ids?: (string | null)[] | null;
+  channel?: string | null;
 }
 
 export interface ProductOrder {
   direction: OrderDirection;
+  channel?: string | null;
   attributeId?: string | null;
   field?: ProductOrderField | null;
 }

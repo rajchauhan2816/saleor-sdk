@@ -49,3 +49,15 @@ export const tokenRefreshMutation = gql`
     }
   }
 `;
+
+export const otpGenerate = gql`
+  ${accountErrorFragment}
+  mutation generateOtp($mobile: String) {
+    generateOtp(mobile: $mobile) {
+      authCode
+      errors: accountErrors {
+        ...AccountError
+      }
+    }
+  }
+`;

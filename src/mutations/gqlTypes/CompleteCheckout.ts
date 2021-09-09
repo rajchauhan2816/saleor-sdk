@@ -16,8 +16,7 @@ export interface CompleteCheckout_checkoutComplete_errors {
    */
   code: CheckoutErrorCode;
   /**
-   * Name of a field that caused the error. A value of `null` indicates that the
-   * error isn't associated with a particular field.
+   * Name of a field that caused the error. A value of `null` indicates that the error isn't associated with a particular field.
    */
   field: string | null;
   /**
@@ -538,11 +537,7 @@ export interface CompleteCheckout_checkoutComplete {
 
 export interface CompleteCheckout {
   /**
-   * Completes the checkout. As a result a new order is created and a payment
-   * charge is made. This action requires a successful payment before it can be
-   * performed. In case additional confirmation step as 3D secure is required
-   * confirmationNeeded flag will be set to True and no order created until payment
-   * is confirmed with second call of this mutation.
+   * Completes the checkout. As a result a new order is created and a payment charge is made. This action requires a successful payment before it can be performed. In case additional confirmation step as 3D secure is required confirmationNeeded flag will be set to True and no order created until payment is confirmed with second call of this mutation.
    */
   checkoutComplete: CompleteCheckout_checkoutComplete | null;
 }

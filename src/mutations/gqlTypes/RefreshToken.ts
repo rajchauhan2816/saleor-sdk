@@ -24,8 +24,7 @@ export interface RefreshToken_tokenRefresh_errors {
    */
   code: AccountErrorCode;
   /**
-   * Name of a field that caused the error. A value of `null` indicates that the
-   * error isn't associated with a particular field.
+   * Name of a field that caused the error. A value of `null` indicates that the error isn't associated with a particular field.
    */
   field: string | null;
   /**
@@ -49,9 +48,7 @@ export interface RefreshToken_tokenRefresh {
 
 export interface RefreshToken {
   /**
-   * Refresh JWT token. Mutation tries to take refreshToken from the input.If it
-   * fails it will try to take refreshToken from the http-only cookie
-   * -refreshToken. csrfToken is required when refreshToken is provided as a cookie.
+   * Refresh JWT token. Mutation tries to take refreshToken from the input.If it fails it will try to take refreshToken from the http-only cookie -refreshToken. csrfToken is required when refreshToken is provided as a cookie.
    */
   tokenRefresh: RefreshToken_tokenRefresh | null;
 }
